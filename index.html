@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#080808;
+  --surface:#0f0f0f;
+  --surface2:#161616;
+  --border:#1e1e1e;
+  --text:#e8e4dc;
+  --muted:#5a5850;
+  --accent:#c8a96e;
+  --accent2:#4a9eff;
+  --font-display:'Bebas Neue',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden;cursor:none}
+
+/* Custom cursor */
+#cursor{position:fixed;width:8px;height:8px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(200,169,110,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s ease}
+body:hover #cursor{opacity:1}
+
+/* Noise overlay */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(8,8,8,.95) 0%,transparent 100%)}
+.nav-logo{font-family:var(--font-display);font-size:22px;letter-spacing:3px;color:var(--text)}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 48px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 60% 40%,rgba(74,158,255,0.06) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(200,169,110,0.04) 0%,transparent 60%);z-index:0}
+.hero-line{position:absolute;top:0;left:48px;width:1px;height:100%;background:linear-gradient(to bottom,transparent,var(--border) 30%,var(--border) 70%,transparent);opacity:.5}
+.hero-content{position:relative;z-index:2;max-width:900px}
+.hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
+.hero-title{font-family:var(--font-display);font-size:clamp(64px,10vw,140px);line-height:.9;letter-spacing:2px;margin-bottom:32px}
+.hero-title .line2{color:transparent;-webkit-text-stroke:1px rgba(232,228,220,0.3);display:block}
+.hero-desc{font-size:15px;color:var(--muted);max-width:480px;line-height:1.8;font-weight:300}
+.hero-scroll{position:absolute;bottom:48px;right:48px;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:10px;letter-spacing:3px;text-transform:uppercase}
+.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,var(--muted),transparent);animation:scrollAnim 2s ease-in-out infinite}
+@keyframes scrollAnim{0%,100%{opacity:.3;transform:scaleY(.5) translateY(-10px)}50%{opacity:1;transform:scaleY(1) translateY(0)}}
+
+/* SECTION */
+.section{padding:120px 48px}
+.section-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';display:block;width:32px;height:1px;background:var(--accent)}
+
+/* PROJECTS */
+.project{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:1px;background:var(--border);min-height:560px;opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.project.visible{opacity:1;transform:translateY(0)}
+.project:nth-child(even){direction:rtl}
+.project:nth-child(even) > *{direction:ltr}
+.project-media{position:relative;overflow:hidden;background:#0a0a0a}
+.project-media iframe{width:100%;height:100%;border:none;display:block;min-height:400px}
+.project-media .placeholder{width:100%;height:100%;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:var(--surface);color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase}
+.placeholder-icon{width:48px;height:48px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px}
+.media-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(200,169,110,.04) 0%,transparent 50%);pointer-events:none;z-index:1}
+.project-info{background:var(--surface);padding:56px 48px;display:flex;flex-direction:column;justify-content:space-between}
+.project-number{font-family:var(--font-display);font-size:72px;line-height:1;color:var(--border);margin-bottom:auto;letter-spacing:2px}
+.project-meta{flex:1;display:flex;flex-direction:column;justify-content:center;padding:32px 0}
+.project-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border:1px solid var(--border);color:var(--muted)}
+.tag.highlight{border-color:rgba(200,169,110,.4);color:var(--accent)}
+.project-title{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);line-height:1;letter-spacing:1px;margin-bottom:16px}
+.project-desc{font-size:14px;color:var(--muted);line-height:1.8;font-weight:300;max-width:400px}
+.project-footer{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding-top:24px;margin-top:24px}
+.project-platform{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.project-link{width:40px;height:40px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .2s;font-size:16px}
+.project-link:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-title{font-family:var(--font-display);font-size:clamp(40px,6vw,80px);line-height:.95;letter-spacing:1px;margin-bottom:32px}
+.about-title em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(200,169,110,.5)}
+.about-text{font-size:15px;color:var(--muted);line-height:1.9;font-weight:300;margin-bottom:24px}
+.skills-list{display:flex;flex-direction:column;gap:1px}
+.skill-row{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:13px}
+.skill-name{color:var(--text);letter-spacing:.5px}
+.skill-level{color:var(--accent);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+
+/* CONTACT */
+.contact-section{padding:120px 48px;border-top:1px solid var(--border)}
+.contact-title{font-family:var(--font-display);font-size:clamp(48px,8vw,110px);line-height:.9;letter-spacing:2px;margin-bottom:64px}
+.contact-title span{color:var(--accent)}
+.contact-row{display:flex;gap:16px;align-items:center;padding:20px 0;border-bottom:1px solid var(--border);transition:all .2s;cursor:pointer}
+.contact-row:hover .contact-arrow{transform:translateX(8px)}
+.contact-row:hover .contact-label{color:var(--text)}
+.contact-label{font-family:var(--font-display);font-size:24px;letter-spacing:2px;color:var(--muted);flex:1;transition:color .2s}
+.contact-value{font-size:13px;color:var(--muted);letter-spacing:1px}
+.contact-arrow{transition:transform .2s;color:var(--accent);font-size:18px}
+
+/* FOOTER */
+footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border)}
+.footer-text{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+/* Horizontal rule accent */
+.hr-accent{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
+
+@media(max-width:768px){
+  nav{padding:20px 24px}
+  .hero{padding:0 24px 64px}
+  .section{padding:80px 24px}
+  .project{grid-template-columns:1fr}
+  .project:nth-child(even){direction:ltr}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  .contact-section{padding:80px 24px}
+  footer{padding:24px;flex-direction:column;gap:12px;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <div class="nav-logo">My Portfolio<span></div>
+  <div class="nav-links">
+    <a href="#projects">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Extended Reality Developer</div>
+    <h1 class="hero-title">
+      IMMERSIVE<br>
+      <span class="line2">EXPERIENCES</span>
+    </h1>
+    <p class="hero-desc">Building real-time 3D experiences across VR, MR, automotive visualisation and architectural rendering — from Unity to Unreal Engine.</p>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<div class="hr-accent"></div>
+
+<section class="section" id="projects">
+  <div class="section-label">Selected Work</div>
+
+  <!-- Project 1 -->
+  <div class="project" data-observe>
+    <div class="project-media">
+      <div class="placeholder">
+        <div class="placeholder-icon">▶</div>
+        <span>MR Car Configurator</span>
+        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      </div>
+      <div class="media-overlay"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-number">01</div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag highlight">Mixed Reality</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Automotive</span>
+        </div>
+        <h2 class="project-title">MR CAR CONFIGURATOR</h2>
+        <p class="project-desc">A mixed reality car configuration experience built in Unity. Users can visualise and customise vehicles in their physical environment — changing colours, trims and features in real-time through a spatial interface.</p>
+      </div>
+      <div class="project-footer">
+        <span class="project-platform">Unity · HoloLens / Quest</span>
+        <a href="#" class="project-link">↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 2 -->
+  <div class="project" data-observe>
+    <div class="project-media">
+      <div class="placeholder">
+        <div class="placeholder-icon">▶</div>
+        <span>Porsche Configurator</span>
+        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      </div>
+      <div class="media-overlay"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-number">02</div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag highlight">Unreal Engine</span>
+          <span class="tag">Web · PC</span>
+          <span class="tag">Automotive</span>
+        </div>
+        <h2 class="project-title">PORSCHE CAR CONFIGURATOR</h2>
+        <p class="project-desc">A photorealistic Porsche configurator built in Unreal Engine 5, deployed across web and PC platforms. Real-time ray tracing, material switching and environment lighting deliver a cinematic product visualisation experience.</p>
+      </div>
+      <div class="project-footer">
+        <span class="project-platform">Unreal Engine 5 · Web · PC</span>
+        <a href="#" class="project-link">↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 3 -->
+  <div class="project" data-observe>
+    <div class="project-media">
+      <div class="placeholder">
+        <div class="placeholder-icon">▶</div>
+        <span>VR Forklift Simulator</span>
+        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      </div>
+      <div class="media-overlay"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-number">03</div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag highlight">Virtual Reality</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Training</span>
+        </div>
+        <h2 class="project-title">VR FORKLIFT SIMULATOR</h2>
+        <p class="project-desc">An immersive VR training simulator for forklift operation built in Unity. Designed to safely train operators in realistic warehouse environments — complete with physics-based vehicle handling and safety protocol scenarios.</p>
+      </div>
+      <div class="project-footer">
+        <span class="project-platform">Unity · VR Headset</span>
+        <a href="#" class="project-link">↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project 4 -->
+  <div class="project" data-observe>
+    <div class="project-media">
+      <div class="placeholder">
+        <div class="placeholder-icon">▶</div>
+        <span>DC Production Plant</span>
+        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      </div>
+      <div class="media-overlay"></div>
+    </div>
+    <div class="project-info">
+      <div class="project-number">04</div>
+      <div class="project-meta">
+        <div class="project-tags">
+          <span class="tag highlight">Android</span>
+          <span class="tag">Unity</span>
+          <span class="tag">Industrial</span>
+        </div>
+        <h2 class="project-title">DC PRODUCTION PLANT</h2>
+        <p class="project-desc">An interactive 3D visualisation of a DC production plant built for Android. Lets stakeholders and engineers explore facility layout, machinery placement and production flow on a mobile device — without being on-site.</p>
+      </div>
+      <div class="project-footer">
+        <span class="project-platform">Unity · Android</span>
+        <a href="#" class="project-link">↗</a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="hr-accent"></div>
+
+<section class="section" id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="about-title">BUILDING THE<br><em>FUTURE</em><br>OF SPATIAL</h2>
+      <p class="about-text">I specialise in real-time 3D development across extended reality platforms — from mixed reality configurators and VR training simulations to photorealistic automotive and architectural visualisations.</p>
+      <p class="about-text">Every project is built with the end experience in mind: whether that's a client walking around their future building in AR, or a trainee operating a forklift safely in VR for the first time.</p>
+    </div>
+    <div class="skills-list">
+      <div class="skill-row"><span class="skill-name">Unity 3D</span><span class="skill-level">Expert</span></div>
+      <div class="skill-row"><span class="skill-name">Unreal Engine 5</span><span class="skill-level">Advanced</span></div>
+      <div class="skill-row"><span class="skill-name">VR / MR Development</span><span class="skill-level">Expert</span></div>
+      <div class="skill-row"><span class="skill-name">C# / Blueprints</span><span class="skill-level">Advanced</span></div>
+      <div class="skill-row"><span class="skill-name">Automotive Visualisation</span><span class="skill-level">Advanced</span></div>
+      <div class="skill-row"><span class="skill-name">Architectural Viz</span><span class="skill-level">Intermediate</span></div>
+      <div class="skill-row"><span class="skill-name">Android Development</span><span class="skill-level">Intermediate</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <h2 class="contact-title">LET'S<br><span>WORK</span><br>TOGETHER</h2>
+  <div class="contact-row">
+    <span class="contact-label">EMAIL</span>
+    <span class="contact-value">your@email.com</span>
+    <span class="contact-arrow">→</span>
+  </div>
+  <div class="contact-row">
+    <span class="contact-label">LINKEDIN</span>
+    <span class="contact-value">linkedin.com/in/yourprofile</span>
+    <span class="contact-arrow">→</span>
+  </div>
+  <div class="contact-row">
+    <span class="contact-label">GITHUB</span>
+    <span class="contact-value">github.com/yourusername</span>
+    <span class="contact-arrow">→</span>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2026 — XR Studio</span>
+  <span class="footer-text">Built for GitHub Pages</span>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+(function animate(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animate)})();
+document.querySelectorAll('a,button,.project-link,.contact-row,.nav-links a').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='16px';cursor.style.height='16px';cursor.style.background='transparent';cursor.style.border='1px solid var(--accent)';ring.style.width='48px';ring.style.height='48px'});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='8px';cursor.style.height='8px';cursor.style.background='var(--accent)';cursor.style.border='none';ring.style.width='32px';ring.style.height='32px'});
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('[data-observe]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
