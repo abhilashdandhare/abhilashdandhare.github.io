@@ -109,17 +109,18 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
 .hr-accent{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0}
 
 /* SLIDER */
-.slider{position:relative;width:100%;height:100%;min-height:400px;overflow:hidden;background:#000}
-.slider-track{display:flex;height:100%;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
-.slide{min-width:100%;height:100%;flex-shrink:0;position:relative}
+.slider{position:relative;width:100%;overflow:hidden;background:#080808}
+.slider-track{display:flex;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1)}
+.slide{min-width:100%;flex-shrink:0;position:relative}
+.slide img{width:100%;height:auto;display:block}
 .slider-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:10;width:40px;height:40px;background:rgba(8,8,8,0.85);border:1px solid var(--border);color:var(--text);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.2s}
 .slider-btn:hover{background:var(--surface2);border-color:var(--accent);color:var(--accent)}
 .slider-btn.prev{left:12px}
 .slider-btn.next{right:12px}
 .slider-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
-.slider-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);cursor:pointer;transition:all 0.2s}
+.slider-dot{width:6px;height:6px;border-radius:50%;background:rgba(232,228,220,0.4);cursor:pointer;transition:all 0.2s}
 .slider-dot.active{background:var(--accent);width:18px;border-radius:3px}
-.slide-label{position:absolute;top:12px;left:12px;font-size:9px;letter-spacing:2px;color:rgba(200,169,110,0.6);font-family:var(--font-body);text-transform:uppercase;z-index:5;background:rgba(8,8,8,0.6);padding:3px 8px}
+.slide-label{position:absolute;top:12px;left:12px;font-size:9px;letter-spacing:2px;color:rgba(200,169,110,0.8);font-family:var(--font-body);text-transform:uppercase;z-index:5;background:rgba(8,8,8,0.7);padding:3px 8px}
 
 @media(max-width:768px){
   nav{padding:20px 24px}
@@ -174,11 +175,11 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
     <div class="project-media">
       <div class="slider" id="slider-hmi">
         <div class="slider-track" id="track-hmi">
-          <div class="slide"><div class="slide-label">Home Screen</div><img src="hmi_01_home.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Navigation Screen</div><img src="hmi_02_navigation.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Media Screen</div><img src="hmi_03_media.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Climate Screen</div><img src="hmi_04_climate.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Phone Screen</div><img src="hmi_05_phone.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
+          <div class="slide"><div class="slide-label">Home Screen</div><img src="hmi_01_home.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Navigation Screen</div><img src="hmi_02_navigation.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Media Screen</div><img src="hmi_03_media.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Climate Screen</div><img src="hmi_04_climate.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Phone Screen</div><img src="hmi_05_phone.png" style="width:100%;height:auto;display:block"></div>
 
         </div>
         <button class="slider-btn prev" onclick="slideHMI(-1)">←</button>
@@ -220,10 +221,10 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
     <div class="project-media">
       <div class="slider" id="slider-aaos">
         <div class="slider-track" id="track-aaos">
-          <div class="slide"><div class="slide-label">Launcher</div><img src="aaos_01_launcher.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Google Maps</div><img src="aaos_02_maps.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Media Player</div><img src="aaos_03_media.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
-          <div class="slide"><div class="slide-label">Settings</div><img src="aaos_04_settings.png" style="width:100%;height:100%;object-fit:contain;min-height:400px;display:block;background:#080808"></div>
+          <div class="slide"><div class="slide-label">Launcher</div><img src="aaos_01_launcher.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Google Maps</div><img src="aaos_02_maps.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Media Player</div><img src="aaos_03_media.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Settings</div><img src="aaos_04_settings.png" style="width:100%;height:auto;display:block"></div>
         </div>
         <button class="slider-btn prev" onclick="slideAAOS(-1)">←</button>
         <button class="slider-btn next" onclick="slideAAOS(1)">→</button>
