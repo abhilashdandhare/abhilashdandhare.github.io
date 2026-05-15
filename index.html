@@ -261,10 +261,23 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
   <!-- Project 3 — MR Car Configurator -->
   <div class="project" data-observe>
     <div class="project-media">
-      <div class="placeholder">
-        <div class="placeholder-icon">▶</div>
-        <span>MR Car Configurator</span>
-        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      <div class="slider" id="slider-mr">
+        <div class="slider-track" id="track-mr">
+          <div class="slide"><div class="slide-label">Start Screen</div><img src="mr_01.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Vehicle Selection</div><img src="mr_02.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Sports Sedan — Color Config</div><img src="mr_03.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Luxury SUV — Door Open</div><img src="mr_04.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Luxury SUV — Color Config</div><img src="mr_05.png" style="width:100%;height:auto;display:block"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slideMR(-1)">←</button>
+        <button class="slider-btn next" onclick="slideMR(1)">→</button>
+        <div class="slider-dots" id="dots-mr">
+          <div class="slider-dot active" onclick="goSlideMR(0)"></div>
+          <div class="slider-dot" onclick="goSlideMR(1)"></div>
+          <div class="slider-dot" onclick="goSlideMR(2)"></div>
+          <div class="slider-dot" onclick="goSlideMR(3)"></div>
+          <div class="slider-dot" onclick="goSlideMR(4)"></div>
+        </div>
       </div>
       <div class="media-overlay"></div>
     </div>
@@ -281,7 +294,10 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
       </div>
       <div class="project-footer">
         <span class="project-platform">Unity · HoloLens / Quest</span>
-        <a href="#" class="project-link">↗</a>
+        <div style="display:flex;gap:8px">
+          <a href="https://github.com/abhilashdandhare" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px">Repo ↗</a>
+          <a href="#" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px;opacity:0.5" title="Video coming soon">Video ↗</a>
+        </div>
       </div>
     </div>
   </div>
@@ -315,7 +331,27 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
   </div>
 
   <!-- Project 5 — VR Forklift -->
-        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+  <div class="project" data-observe>
+    <div class="project-media">
+      <div class="slider" id="slider-vr">
+        <div class="slider-track" id="track-vr">
+          <div class="slide"><div class="slide-label">Training Scenario Select</div><img src="vr_01.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Basic Pickup — Warehouse</div><img src="vr_02.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Narrow Aisle — Navigation</div><img src="vr_03.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Double Stack — Delivery</div><img src="vr_04.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Hazard Zone — Safety Protocol</div><img src="vr_05.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Open Warehouse — Scenario</div><img src="vr_06.png" style="width:100%;height:auto;display:block"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slideVR(-1)">←</button>
+        <button class="slider-btn next" onclick="slideVR(1)">→</button>
+        <div class="slider-dots" id="dots-vr">
+          <div class="slider-dot active" onclick="goSlideVR(0)"></div>
+          <div class="slider-dot" onclick="goSlideVR(1)"></div>
+          <div class="slider-dot" onclick="goSlideVR(2)"></div>
+          <div class="slider-dot" onclick="goSlideVR(3)"></div>
+          <div class="slider-dot" onclick="goSlideVR(4)"></div>
+          <div class="slider-dot" onclick="goSlideVR(5)"></div>
+        </div>
       </div>
       <div class="media-overlay"></div>
     </div>
@@ -332,18 +368,36 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
       </div>
       <div class="project-footer">
         <span class="project-platform">Unity · VR Headset</span>
-        <a href="#" class="project-link">↗</a>
+        <div style="display:flex;gap:8px">
+          <a href="https://github.com/abhilashdandhare" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px">Repo ↗</a>
+          <a href="#" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px;opacity:0.5" title="Video coming soon">Video ↗</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Project 4 -->
+  <!-- Project 6 — DC Production Plant -->
   <div class="project" data-observe>
     <div class="project-media">
-      <div class="placeholder">
-        <div class="placeholder-icon">▶</div>
-        <span>DC Production Plant</span>
-        <span style="font-size:10px;opacity:.5">Replace with YouTube embed</span>
+      <div class="slider" id="slider-dc">
+        <div class="slider-track" id="track-dc">
+          <div class="slide"><div class="slide-label">Production Floor Overview</div><img src="dc_01.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">KUKA Robot Cell</div><img src="dc_02.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Control Cabinet — Interior</div><img src="dc_03.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Cabinet Detail — Sinamics</div><img src="dc_04.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Research Papers — FAPS</div><img src="dc_05.png" style="width:100%;height:auto;display:block"></div>
+          <div class="slide"><div class="slide-label">Research Papers — Index</div><img src="dc_06.png" style="width:100%;height:auto;display:block"></div>
+        </div>
+        <button class="slider-btn prev" onclick="slideDC(-1)">←</button>
+        <button class="slider-btn next" onclick="slideDC(1)">→</button>
+        <div class="slider-dots" id="dots-dc">
+          <div class="slider-dot active" onclick="goSlideDC(0)"></div>
+          <div class="slider-dot" onclick="goSlideDC(1)"></div>
+          <div class="slider-dot" onclick="goSlideDC(2)"></div>
+          <div class="slider-dot" onclick="goSlideDC(3)"></div>
+          <div class="slider-dot" onclick="goSlideDC(4)"></div>
+          <div class="slider-dot" onclick="goSlideDC(5)"></div>
+        </div>
       </div>
       <div class="media-overlay"></div>
     </div>
@@ -360,7 +414,10 @@ footer{padding:32px 48px;display:flex;justify-content:space-between;align-items:
       </div>
       <div class="project-footer">
         <span class="project-platform">Unity · Android</span>
-        <a href="#" class="project-link">↗</a>
+        <div style="display:flex;gap:8px">
+          <a href="https://github.com/abhilashdandhare" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px">Repo ↗</a>
+          <a href="#" target="_blank" class="project-link" style="font-size:11px;width:auto;padding:0 12px;letter-spacing:1px;opacity:0.5" title="Video coming soon">Video ↗</a>
+        </div>
       </div>
     </div>
   </div>
@@ -434,6 +491,36 @@ function goSlideAAOS(n) {
   aaosIndex = (n + aaosTotal) % aaosTotal;
   document.getElementById('track-aaos').style.transform = `translateX(-${aaosIndex * 100}%)`;
   document.querySelectorAll('#dots-aaos .slider-dot').forEach((d,i) => d.classList.toggle('active', i === aaosIndex));
+}
+
+// Slider — MR Car Configurator
+let mrIndex = 0;
+const mrTotal = 5;
+function slideMR(dir) { goSlideMR(mrIndex + dir); }
+function goSlideMR(n) {
+  mrIndex = (n + mrTotal) % mrTotal;
+  document.getElementById('track-mr').style.transform = `translateX(-${mrIndex * 100}%)`;
+  document.querySelectorAll('#dots-mr .slider-dot').forEach((d,i) => d.classList.toggle('active', i === mrIndex));
+}
+
+// Slider — VR Forklift
+let vrIndex = 0;
+const vrTotal = 6;
+function slideVR(dir) { goSlideVR(vrIndex + dir); }
+function goSlideVR(n) {
+  vrIndex = (n + vrTotal) % vrTotal;
+  document.getElementById('track-vr').style.transform = `translateX(-${vrIndex * 100}%)`;
+  document.querySelectorAll('#dots-vr .slider-dot').forEach((d,i) => d.classList.toggle('active', i === vrIndex));
+}
+
+// Slider — DC Production Plant
+let dcIndex = 0;
+const dcTotal = 6;
+function slideDC(dir) { goSlideDC(dcIndex + dir); }
+function goSlideDC(n) {
+  dcIndex = (n + dcTotal) % dcTotal;
+  document.getElementById('track-dc').style.transform = `translateX(-${dcIndex * 100}%)`;
+  document.querySelectorAll('#dots-dc .slider-dot').forEach((d,i) => d.classList.toggle('active', i === dcIndex));
 }
 
 // Custom cursor
